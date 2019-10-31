@@ -5,7 +5,9 @@ import 'package:bmi_calculator/reusable_card.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
+bool cardSelected = false;
 enum Gender {male, female}
 
 class InputPage extends StatefulWidget {
@@ -14,6 +16,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+
+  Color maleCardColor = inactiveCardColor;
+  Color femaleCardColor = inactiveCardColor;
 
 
 
@@ -29,21 +35,35 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: new ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: new IconContent(
-                      cardIcon: FontAwesomeIcons.mars,
-                      cardText: 'male',
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        updateColor(Gender.male);
+                      });
+                    },
+                    child: new ReusableCard(
+                      colour: maleCardColor,
+                      cardChild: new IconContent(
+                        cardIcon: FontAwesomeIcons.mars,
+                        cardText: 'male',
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: new ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: new IconContent(
-                      cardIcon: FontAwesomeIcons.venus,
-                      cardText: 'female',
-                  ),
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        updateColor(Gender.female);
+                      });
+                    },
+                    child: new ReusableCard(
+                      colour: femaleCardColor,
+                      cardChild: new IconContent(
+                        cardIcon: FontAwesomeIcons.venus,
+                        cardText: 'female',
+                    ),
+                    ),
                   ),
                 ),
               ],
